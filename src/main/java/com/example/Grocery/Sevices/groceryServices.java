@@ -31,6 +31,7 @@ public class groceryServices {
         store.setItems(request.items());
         store.setQuantity(request.quantity());
         store.setUnitPrice(request.unitPrice());
+        store.setCompleteTask(request.completeTask());
         groceryItem saveItems = repo.save(store);
         return mapToResponse(saveItems);
 
@@ -57,18 +58,19 @@ public class groceryServices {
     //UPDATE THE IDEMS
     @Transactional
     public groceryResponse Update(Long id, groceryRequest request) {
-        groceryItem f = repo.findById(id)
+        groceryItem update = repo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Items not found with Id" + id));
 
-        if (!f.getItems().equalsIgnoreCase(request.items())
+        if (!update.getItems().equalsIgnoreCase(request.items())
                 && repo.existsByItems(request.items())) {
             throw new DuplicateErrorHanding("Item already exists");
         }
-        groceryItem update = new groceryItem();
+
         update.setCategory(request.category());
         update.setItems(request.items());
         update.setQuantity(request.quantity());
         update.setUnitPrice(request.unitPrice());
+        update.setCompleteTask(request.completeTask());
         groceryItem saveItems = repo.save(update);
         return mapToResponse(saveItems);
     }

@@ -23,6 +23,7 @@ public record groceryRequest(
         double 	unitPrice,
 
         @Enumerated(EnumType.STRING)
+        @Column( nullable = false)
         TaskStatus completeTask
     )
     {

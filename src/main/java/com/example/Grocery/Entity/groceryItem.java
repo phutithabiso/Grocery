@@ -10,11 +10,10 @@ import lombok.NoArgsConstructor;
 import java.util.UUID;
 
 @Entity
-@Table(name ="userGroceryList")
+@Table(name = "userGroceryList")
 @Data
 @NoArgsConstructor
-public class groceryItem
-{
+public class groceryItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,7 +30,7 @@ public class groceryItem
     private double quantity;
     @Positive(message = "Unit price must be greater than zero")
     @Column(nullable = false)
-    private double 	unitPrice;
+    private double unitPrice;
 
     @Enumerated(EnumType.STRING)
     private TaskStatus completeTask;
