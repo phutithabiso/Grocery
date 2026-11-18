@@ -3,6 +3,7 @@ package com.example.Grocery.Entity;
 import jakarta.persistence.*;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,24 +15,24 @@ import java.util.UUID;
 @NoArgsConstructor
 public class groceryItem
 {
-    @id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank(message = "Categoty is required")
-    @Column(nullable = false,length = 30)
+    @Column(nullable = false)
     private String category;
 
     @NotBlank(message = "Grocery item is required")
-    @Column(nullable = false,length = 50)
+    @Column(nullable = false)
     private String items;
 
-    @NotBlank(message = " Quantity  is required")
-    @Column(nullable = false,length = 20)
+    @Positive(message = "Quantity must be greater than zero")
+    @Column(nullable = false)
     private double quantity;
-    @NotBlank(message = "Unit Price is required")
-    @Column(nullable = false,length = 30)
+    @Positive(message = "Unit price must be greater than zero")
+    @Column(nullable = false)
     private double 	unitPrice;
 
     @Enumerated(EnumType.STRING)
-    private String completeTask;
+    private TaskStatus completeTask;
 }
